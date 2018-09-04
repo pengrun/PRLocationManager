@@ -1,9 +1,9 @@
 //
 //  PRCLLocationManager.h
-//  PRLocationManager
+//  CarWaiter
 //
-//  Created by huashuda on 2018/9/3.
-//  Copyright © 2018年 huashuda. All rights reserved.
+//  Created by MH-Pengrun on 15/6/15.
+//  Copyright (c) 2015年 MH. All rights reserved.
 //
 
 #import <CoreLocation/CoreLocation.h>
@@ -26,10 +26,15 @@ typedef void (^PRLocationFaile)(NSError *error);
  @return YES 可以定位 NO 不能定位
  */
 - (BOOL)isEnabledLocation;
+
+/**
+ 开始定位
+ */
+- (void)startLocation;
 /**
  停止定位，开始后要手动停止
  */
-- (void)locationStop;
+- (void)stopLocation;
 /**
  回调结果
 

@@ -1,9 +1,9 @@
 //
 //  PRCLLocationManager.m
-//  PRLocationManager
+//  CarWaiter
 //
-//  Created by huashuda on 2018/9/3.
-//  Copyright © 2018年 huashuda. All rights reserved.
+//  Created by MH-Pengrun on 15/6/15.
+//  Copyright (c) 2015年 MH. All rights reserved.
 //
 
 #import "PRLocationManager.h"
@@ -53,7 +53,7 @@
     return NO;
 }
 // 定位开始
-- (void)locationStart {
+- (void)startLocation {
     if ([self isEnabledLocation]) {
         NSLog(@"开始定位");
         [self startUpdatingLocation];
@@ -64,10 +64,10 @@
     self.successBlock = [success copy];
     self.errorBlock = [faile copy];
     
-    [self locationStart];
+    [self startLocation];
 }
 // 定位停止
-- (void)locationStop {
+- (void)stopLocation {
     NSLog(@"结束定位");
     [self stopUpdatingLocation];
 }
@@ -76,14 +76,13 @@
 #pragma mark ^^^^^^ 开始定位 ^^^^^^
 // 获取定位信息
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    // locations存储了持续更新的位置坐标值，取最后一个值为最新位置，如果不想让其持续更新位置，则在此方法中获取到一个值之后让locationManager stopUpdatingLocation
+    // 获取最新的位置
     CLLocation *currentLocation = [locations lastObject];
     
-    // 纬度：loc.coordinate.latitude
-    // 经度：loc.coordinate.longitude
+    // 纬度：latitude 经度：longitude
     NSLog(@"纬度=%f，经度=%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
     
-    // 获取当前所在的城市名
+    // 初始化反地理编码 geocoder
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     // 根据经纬度反向地理编译出地址信息
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *array, NSError *error) {
@@ -92,20 +91,24 @@
             !self.successBlock ?: self.successBlock(currentLocation, placemark);
         } else {
             if (([error code] == kCLErrorDenied)) {
-                !self.currentAuthStatus ?: self.currentAuthStatus(NO);
+                !self.currentAuthStatus ? (!self.errorBlock ?: self.errorBlock(error)) : self.currentAuthStatus(NO); // 如果self.currentAuthStatus没有回调，那么就回调self.errorBlock
             } else {
                 !self.errorBlock ?: self.errorBlock(error);
             }
         }
     }];
-    
-    // 注意：获取之后就停止更新，避免系统会多次更新数据，直到选择停止更新，因为我们只需要获得一次经纬度即可
-    [self locationStop];
+    // 如果只需要获取一次，那么手动调用停止
+    // 如果想持续获取，那么注释掉此行代码
+    [self stopLocation];
 }
 #pragma mark ^^^^^^ 定位失败 ^^^^^^
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    !self.errorBlock ?: self.errorBlock(error);
-    [self locationStop];
+    if (([error code] == kCLErrorDenied)) {
+        !self.currentAuthStatus ? (!self.errorBlock ?: self.errorBlock(error)) : self.currentAuthStatus(NO); // 如果self.currentAuthStatus没有回调，那么就回调self.errorBlock
+    } else {
+        !self.errorBlock ?: self.errorBlock(error);
+    }
+    [self stopLocation];
 }
 #pragma mark ^^^^^^ 授权改变 ^^^^^^
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {

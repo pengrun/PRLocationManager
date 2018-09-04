@@ -13,6 +13,7 @@
 		14A217ED213D06A60095E76C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14A217EC213D06A60095E76C /* Assets.xcassets */; };
 		14A217F0213D06A60095E76C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A217EE213D06A60095E76C /* LaunchScreen.storyboard */; };
 		14A217F3213D06A60095E76C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A217F2213D06A60095E76C /* main.m */; };
+		14A79A21213E175C00883E92 /* PRLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A79A20213E175C00883E92 /* PRLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		14A217EF213D06A60095E76C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14A217F1213D06A60095E76C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A217F2213D06A60095E76C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		14A79A1F213E175C00883E92 /* PRLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRLocationManager.h; sourceTree = "<group>"; };
+		14A79A20213E175C00883E92 /* PRLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRLocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				14A217E4213D06A30095E76C /* AppDelegate.m */,
 				14A217E6213D06A30095E76C /* ViewController.h */,
 				14A217E7213D06A30095E76C /* ViewController.m */,
+				14A79A1F213E175C00883E92 /* PRLocationManager.h */,
+				14A79A20213E175C00883E92 /* PRLocationManager.m */,
 				14A217E9213D06A30095E76C /* Main.storyboard */,
 				14A217EC213D06A60095E76C /* Assets.xcassets */,
 				14A217EE213D06A60095E76C /* LaunchScreen.storyboard */,
@@ -141,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A79A21213E175C00883E92 /* PRLocationManager.m in Sources */,
 				14A217E8213D06A30095E76C /* ViewController.m in Sources */,
 				14A217F3213D06A60095E76C /* main.m in Sources */,
 				14A217E5213D06A30095E76C /* AppDelegate.m in Sources */,
@@ -284,6 +290,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TKDZ7QR7GT;
 				INFOPLIST_FILE = PRLocationManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,6 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TKDZ7QR7GT;
 				INFOPLIST_FILE = PRLocationManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
